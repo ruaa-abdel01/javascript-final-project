@@ -1,0 +1,2 @@
+U = Unstaged
+A = Added/Staged
