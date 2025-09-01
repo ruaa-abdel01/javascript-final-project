@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Survey</title>
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      background-color: #ffe4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .survey-container {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #333;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 95%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #fdfdfd;
+      font-size: 15px;
+    }
+
+    textarea {
+      height: 90px;
+      resize: vertical;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .radio-group label {
+      background-color: #f0f0f0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .radio-group input[type="radio"] {
+      margin-right: 6px;
+    }
+
+    .radio-group label:hover {
+      background-color: #ffe4f6;
+      border-color: #ffe4f6;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      background-color: #c3a68d;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #89674a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form class="survey-container">
+    <h1>🍪 Cookie Feedback Survey Form 🍪</h1>
+
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter Your Name" />
+
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter Your Email" />
+
+    <label>Select Your Favourite Cookie</label>
+    <div class="radio-group">
+      <label><input type="radio" name="experience" value="Chocolate Chip" />Chocolate Chip</label>
+      <label><input type="radio" name="experience" value="Oatmeal Raisin" />Oatmeal Raisin</label>
+      <label><input type="radio" name="experience" value="Gingerbread" />Gingerbread</label>
+      <label><input type="radio" name="experience" value="Peanut Butter" />Peanut Butter</label>
+      <label><input type="radio" name="experience" value="Snickerdoodle" />Snickerdoodle</label>
+      <label><input type="radio" name="experience" value="Oreo" />Oreo</label>
+    </div>
+
+    <label for="improvements">What Could We Improve?</label>
+    <textarea id="improvements" name="improvements" placeholder="Your Suggestions..."></textarea>
+
+    <label for="recommend">Would You Recommend Our Cookies To Others?</label>
+    <select id="recommend" name="recommend">
+      <option value="">Choose An Option</option>
+      <option value="Definitely">Definitely</option>
+      <option value="Maybe">Maybe</option>
+      <option value="Not Sure">Not Sure</option>
+      <option value="No">No</option>
+    </select>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+</body>
+</html>

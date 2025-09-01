@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My YouTube Playlist (Assignment 7)</title>
+    <style>
+        /* Light Pink Aesthetic */
+        :root {
+            --primary: #d23669;
+            --secondary: #ff85a2;
+            --light-bg: #fff5f7;
+            --card-bg: white;
+            --text: #555;
+            --light-text: #7a7a7a;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 300;
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            grid-column: 1 / -1;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .playlist-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(210, 54, 105, 0.1);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .playlist-info {
+            background-color: #fff0f5;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .playlist-info h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .playlist-description {
+            color: var(--light-text);
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .video-options {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(210, 54, 105, 0.1);
+        }
+        
+        .video-options h2 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ffcce0;
+        }
+        
+        .video-thumbnail {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .video-thumbnail:hover {
+            background-color: #fff0f5;
+            transform: translateX(5px);
+        }
+        
+        .video-thumbnail img {
+            width: 100px;
+            height: 60px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        
+        .video-thumbnail-info {
+            flex: 1;
+        }
+        
+        .video-thumbnail-info h3 {
+            font-size: 0.9rem;
+            margin: 0 0 5px 0;
+            color: var(--primary);
+        }
+        
+        .video-thumbnail-info p {
+            font-size: 0.8rem;
+            margin: 0;
+            color: var(--light-text);
+        }
+        
+        /* Playlist Tracklist */
+        .tracklist {
+            margin-top: 20px;
+        }
+        
+        .tracklist h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .tracklist ol {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .tracklist li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #ffd6e7;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .tracklist li:hover {
+            background-color: #fff0f5;
+        }
+        
+        .tracklist li.active {
+            background-color: #ffd6e7;
+            font-weight: bold;
+        }
+        
+        /* Custom Controls */
+        .video-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .control-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .control-btn:hover {
+            background-color: var(--primary);
+        }
+        
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        /* Dark Mode Styles */
+        body.dark-mode {
+            --primary: #ff85a2;
+            --secondary: #d23669;
+            --light-bg: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text: #e0e0e0;
+            --light-text: #b0b0b0;
+            background-color: var(--light-bg);
+            color: var(--text);
+        }
+        
+        body.dark-mode .playlist-info,
+        body.dark-mode .video-thumbnail:hover,
+        body.dark-mode .tracklist li:hover {
+            background-color: #3a3a3a;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .video-thumbnail img {
+                width: 80px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
+    
+    <div class="container">
+        <h1>My Coding Playlist Hub</h1>
+        
+        <div class="main-content">
+            <div class="playlist-container">
+                <div class="video-wrapper">
+                    <!-- Main Video Embed -->
+                    <iframe 
+                        id="mainVideo"
+                        src="https://www.youtube.com/embed/PkZNo7MFNFg?list=PLWKjhJtqVAbnqBxcdjVGgT3uVR10bzTEB" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div class="video-controls">
+                    <button class="control-btn" id="prevBtn">⏮ Previous</button>
+                    <button class="control-btn" id="nextBtn">Next ⏭</button>
+                    <button class="control-btn" id="shuffleBtn">🔀 Shuffle</button>
+                </div>
+                
+                <div class="playlist-info">
+                    <h2 id="videoTitle">Learn JavaScript - Full Course For Beginners</h2>
+                    <p class="playlist-description" id="videoDescription">
+                        This free course will give you a full introduction to JavaScript. 
+                        Follow along and learn the basics to start your programming journey!
+                    </p>
+                </div>
+                
+                <div class="tracklist">
+                    <h3>Playlist Tracklist</h3>
+                    <ol id="playlistTracks">
+                        <!-- Filled by JavaScript -->
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="video-options">
+                <h2>Recommended Videos</h2>
+                <div class="video-thumbnail" onclick="loadVideo('PkZNo7MFNFg', 'Learn JavaScript - Full Course for Beginners', 'This free course will give you a full introduction to JavaScript. Follow along and learn the basics to start your programming journey!')">
+                    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/mqdefault.jpg" alt="JavaScript Course">
+                    <div class="video-thumbnail-info">
+                        <h3>Learn JavaScript</h3>
+                        <p>FreeCodeCamp • 3h 26m</p>
+                    </div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="loadVideo('RF5_MPSNAtU', 'Learn React in 5 Hours', 'Learn React.js in this full course for beginners!')">
+                    <img src="https://img.youtube.com/vi/RF5_MPSNAtU/mqdefault.jpg" alt="React Course">
+                    <div class="video-thumbnail-info">
+                        <h3>Learn React.js</h3>
+                        <p>FreeCodeCamp • 5h 11m</p>
+                    </div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="loadVideo('t2CEgPsws3U', 'Python for Beginners', 'Learn Python basics in this beginner-friendly course!')">
+                    <img src="https://img.youtube.com/vi/t2CEgPsws3U/mqdefault.jpg" alt="Python Course">
+                    <div class="video-thumbnail-info">
+                        <h3>Python for Beginners</h3>
+                        <p>FreeCodeCamp • 4h 26m</p>
+                    </div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="loadVideo('1Rs2ND1ryYc', 'CSS Full Course', 'Learn CSS in this complete tutorial course.')">
+                    <img src="https://img.youtube.com/vi/1Rs2ND1ryYc/mqdefault.jpg" alt="CSS Course">
+                    <div class="video-thumbnail-info">
+                        <h3>CSS Full Course</h3>
+                        <p>FreeCodeCamp • 6h 18m</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-options">
+                <h2>More Playlists</h2>
+                <div class="video-thumbnail" onclick="loadPlaylist('PLWKjhJtqVAbnqBxcdjVGgT3uVR10bzTEB', 'Web Development Tutorials')">
+                    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/mqdefault.jpg" alt="Web Dev Playlist">
+                    <div class="video-thumbnail-info">
+                        <h3>Web Development</h3>
+                        <p>50 videos • FreeCodeCamp</p>
+                    </div>
+                </div>
+                
+                <div class="video-thumbnail" onclick="loadPlaylist('PLillGF-RfqbZTASqIqdvm1R5mLrQq79CU', 'Frontend Masters')">
+                    <img src="https://img.youtube.com/vi/4UZrsTqkcW4/mqdefault.jpg" alt="Frontend Playlist">
+                    <div class="video-thumbnail-info">
+                        <h3>Frontend Development</h3>
+                        <p>32 videos • Traversy Media</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Playlist Data
+        const playlist = [
+            {
+                id: 'PkZNo7MFNFg',
+                title: 'Learn JavaScript - Full Course for Beginners',
+                description: 'This free course will give you a full introduction to JavaScript. Follow along and learn the basics to start your programming journey!',
+                duration: '3:26:42'
+            },
+            {
+                id: 'RF5_MPSNAtU',
+                title: 'Learn React in 5 Hours',
+                description: 'Learn React.js in this full course for beginners!',
+                duration: '5:11:22'
+            },
+            {
+                id: 't2CEgPsws3U',
+                title: 'Python for Beginners',
+                description: 'Learn Python basics in this beginner-friendly course!',
+                duration: '4:26:15'
+            },
+            {
+                id: '1Rs2ND1ryYc',
+                title: 'CSS Full Course',
+                description: 'Learn CSS in this complete tutorial course.',
+                duration: '6:18:24'
+            },
+            {
+                id: '4UZrsTqkcW4',
+                title: 'HTML Crash Course',
+                description: 'Learn HTML in this complete beginner-friendly course.',
+                duration: '1:09:30'
+            }
+        ];
+        
+        let currentVideoIndex = 0;
+        
+        // Initialize the page
+        function init() {
+            renderTracklist();
+            setupEventListeners();
+            updateDarkModeButton();
+        }
+        
+        // Render the playlist tracklist
+        function renderTracklist() {
+            const tracklistElement = document.getElementById('playlistTracks');
+            tracklistElement.innerHTML = '';
+            
+            playlist.forEach((video, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${index + 1}.</strong> ${video.title} <span>(${video.duration})</span>
+                `;
+                
+                if (index === currentVideoIndex) {
+                    li.classList.add('active');
+                }
+                
+                li.addEventListener('click', () => {
+                    loadVideo(video.id, video.title, video.description);
+                    currentVideoIndex = index;
+                    updateActiveTrack();
+                });
+                
+                tracklistElement.appendChild(li);
+            });
+        }
+        
+        // Load a specific video
+        function loadVideo(videoId, title, description) {
+            const mainVideo = document.getElementById('mainVideo');
+            mainVideo.src = `https://www.youtube.com/embed/${videoId}?list=PLWKjhJtqVAbnqBxcdjVGgT3uVR10bzTEB&autoplay=1`;
+            
+            document.getElementById('videoTitle').textContent = title;
+            document.getElementById('videoDescription').textContent = description;
+            
+            // Update current video index
+            currentVideoIndex = playlist.findIndex(video => video.id === videoId);
+            updateActiveTrack();
+        }
+        
+        // Load a different playlist
+        function loadPlaylist(playlistId, playlistTitle) {
+            const mainVideo = document.getElementById('mainVideo');
+            mainVideo.src = `https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1`;
+            
+            document.getElementById('videoTitle').textContent = playlistTitle;
+            document.getElementById('videoDescription').textContent = `Now playing: ${playlistTitle} playlist`;
+        }
+        
+        // Update the active track in the tracklist
+        function updateActiveTrack() {
+            const tracks = document.querySelectorAll('#playlistTracks li');
+            tracks.forEach((track, index) => {
+                if (index === currentVideoIndex) {
+                    track.classList.add('active');
+                } else {
+                    track.classList.remove('active');
+                }
+            });
+        }
+        
+        // Setup event listeners for controls
+        function setupEventListeners() {
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex - 1 + playlist.length) % playlist.length;
+                const video = playlist[currentVideoIndex];
+                loadVideo(video.id, video.title, video.description);
+            });
+            
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex + 1) % playlist.length;
+                const video = playlist[currentVideoIndex];
+                loadVideo(video.id, video.title, video.description);
+            });
+            
+            document.getElementById('shuffleBtn').addEventListener('click', () => {
+                currentVideoIndex = Math.floor(Math.random() * playlist.length);
+                const video = playlist[currentVideoIndex];
+                loadVideo(video.id, video.title, video.description);
+            });
+            
+            // Dark mode toggle
+            document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        }
+        
+        // Dark mode functionality
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            updateDarkModeButton();
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        
+        function updateDarkModeButton() {
+            const isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('darkModeToggle').textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        
+        // Initialize the page
+        window.onload = init;
+    </script>
+</body>
+</html>
