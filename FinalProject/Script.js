@@ -11,7 +11,7 @@ $(document).ready(function(){
         //Password must be at least 8 characters long and contain at least 1 number
         const passwordPattern = /^(?=.*\d).{8,}$/;
 
-        if(!emailPattern.test(email)){
+        if(!emailPattern.test(username)){
             $("#loginError").text("Please Use A Valid Gmail Address Ending with @gmail.com").removeClass("d-none");
             return;
         }
