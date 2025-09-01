@@ -1,6 +1,6 @@
 $(document).ready(function(){
     //Login Form
-    $("#loginForm").on("Submit", function(e){
+    $("#loginForm").on("submit", function(e){
         e.preventDefault();
 
         const username = $("#username").val().trim();
