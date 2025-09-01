@@ -76,6 +76,6 @@ $(document).ready(function(){
     $("#logoutBtn").on("click", function(){
         $("#productSection").addClass("d-none");
         $("#loginSection").removeClass("d-none");
-        $("#username", "#password").val("");
+        $("#username, #password").val("");
     });
 });
