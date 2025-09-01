@@ -3,7 +3,7 @@ $(document).ready(function(){
     $("#loginForm").on("submit", function(e){
         e.preventDefault();
 
-        const username = $("#username").val().trim();
+        const username = $("#email").val().trim();
         const password = $("#password").val().trim();
 
         //Email must end with @gmail.com to be valid
