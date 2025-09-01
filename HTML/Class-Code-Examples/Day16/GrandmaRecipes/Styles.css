@@ -1,0 +1,113 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonts & Base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fffafc;
+  color: #6b3e49;
+  padding: 2rem;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #e26d91;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #9f5f70;
+}
+
+/* Card Layout */
+.recipe-card {
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 0 8px 20px rgba(232, 130, 162, 0.2);
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Left - Image */
+.recipe-image {
+  flex: 1 1 300px;
+  min-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem;
+}
+
+.recipe-image img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Right - Info */
+.recipe-content {
+  flex: 2 1 400px;
+  padding: 2rem;
+}
+
+.recipe-content h2 {
+  color: #e26d91;
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+
+.recipe-info {
+  background-color: #fff0f7;
+  padding: 1rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  color: #6b3e49;
+}
+
+.ingredients, .instructions, .notes {
+  margin-bottom: 1.5rem;
+}
+
+.ingredients ul, .instructions ol {
+  margin-left: 1.5rem;
+  color: #6b3e49;
+  line-height: 1.6;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #a77284;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .recipe-card {
+    flex-direction: column;
+  }
+
+  .recipe-image {
+    order: -1;
+  }
+
+  .recipe-content {
+    padding: 1rem;
+  }
+}

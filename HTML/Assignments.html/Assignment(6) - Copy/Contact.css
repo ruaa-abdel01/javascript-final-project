@@ -1,0 +1,74 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff5f9; /* Softer pink background */
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.contact-container {
+  max-width: 400px;
+  margin: auto;
+  background-color: #fff;
+  padding: 30px 25px; /* More side padding on mobile */
+  border-radius: 20px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffb8dd;
+  font-size: 1.8rem; /* More prominent heading */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+input,
+textarea {
+  width: 100%; /* Full width inputs */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Include padding in width */
+  transition: all 0.2s ease; /* Smooth transitions */
+}
+
+textarea {
+  min-height: 100px; /* Better textarea size */
+  resize: vertical; /* Allow vertical resize only */
+}
+
+input:focus, 
+textarea:focus {
+  outline: none;
+  border-color: #ff82ac;
+  box-shadow: 0 0 0 2px #ffb8dd80; /* Soft pink glow on focus */
+}
+
+button {
+  background-color: #ffb8dd;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease; /* Smooth hover effect */
+  width: 100%; /* Full-width button */
+}
+
+button:hover {
+  background-color: #ff82ac;
+}

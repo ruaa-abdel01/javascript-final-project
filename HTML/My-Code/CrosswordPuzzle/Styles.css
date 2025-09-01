@@ -1,0 +1,79 @@
+body {
+  background-color: #fff0f5;
+  font-family: 'Poppins', sans-serif;
+  color: #5a2a58;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #d94e94;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.puzzle-wrapper {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+table.crossword {
+  border-collapse: collapse;
+}
+
+table.crossword td {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #f8c1d9;
+  padding: 0;
+  background-color: #fff8fb;
+  border-radius: 6px;
+}
+
+table.crossword td input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: #5a2a58;
+}
+
+table.crossword td.black {
+  background-color: #e5b5cc;
+}
+
+.clues {
+  background-color: #fff0f8;
+  border: 2px dashed #f5a5c1;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 300px;
+}
+
+.clues h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.clues ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.clues li::before {
+  content: "🌸 ";
+}

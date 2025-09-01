@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple XHR vs jQuery AJAX</title>
+    <script src="jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+<h2>What Is AJAX?</h2>
+    <p>AJAX is not a coding language.</p>
+    <p>AJAX is a technique for accessing web servers from a web page.</p>
+    <p>AJAX allows web pages to be updated asynchronously by exchanging small amounts of data with the server behind the scenes.</p>
+    <p>This means that it is possible to update parts of a web page, without reloading the whole page.</p>
+
+<h2>XHR vs jQuery AJAX</h2>
+    <button onclick="xmlLoad()">XHR Request</button>
+    <button onclick="jqueryLoad()">jQuery AJAX Request</button>
+
+    <pre id="output">Click A Button To Load Data...</pre>
+
+
+<script>
+function xmlLoad() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/1', true);
+  xhr.send();
+
+  xhr.onload = function() { 
+    if (xhr.status === 200) {
+      document.getElementById('output').textContent = xhr.responseText;
+    } else {
+      document.getElementById('output').textContent = `Error: ${xhr.status}`;
+    }
+    };
+}
+
+function jqueryLoad() {
+    $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/posts/1',
+        method: 'GET',
+        success: function(data) {
+            document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+        },
+        error: function(xhr, status, error) {
+            document.getElementById('output').textContent = 'Error: ' + xhr.status;
+        }
+    }); 
+}
+</script>
+
+</body>
+</html>

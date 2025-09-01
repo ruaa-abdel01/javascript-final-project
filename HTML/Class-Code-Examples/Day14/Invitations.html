@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitations</title>
+    <link rel="stylesheet" href="Styles2.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Invitations</h1>
+    </header>
+
+    <main>
+        <section id="invitation-form">
+            <h2>Creating Invitations</h2>
+            <h3>Welcome To The Annual Tech Conference 2025</h3>
+            <p>We are excited to invite you to our Annual Tech Conference 2025.</p>
+            <p>Please fill out the form below to send an invitation to your friends and colleagues.</p>
+            <p><strong>Event Date:</strong> July 1<superscript>st</superscript>, 2025</p>
+            <p><strong>Location:</strong> Tech Convention Center, Silicon Valley</p>
+            <p><strong>RSVP By:</strong> June 15<superscript>th</superscript>, 2025</p>
+            <p><i>We look forward to seeing you there!</i></p>
+            
+            <br>
+
+            <!-- ✅ FORM SHOULD START HERE -->
+            <form id="create-invitation-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <button type="submit">Send Invitation</button>
+            </form>
+        </section>
+
+        <section id="invitations-list">
+            <h2>Invitations Sent</h2>
+            <ul id="invitations"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Invitations Inc.</p>
+    </footer>
+
+</body>
+</html>
